@@ -13,6 +13,7 @@
   <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-base.min.js"></script>
+
   <style type="text/css">      
     html, body, #container { 
       width: 720; height: 480; margin: 0; padding: 0; 
@@ -34,7 +35,9 @@
     const X = new Uint16Array(2);
     var change_flag=0;
     var maxLength = 150;
+
     
+
 
     function log(v) {
       var line = Array.prototype.slice.call(arguments).map(function (argument) {
@@ -270,7 +273,8 @@
     let bufferInterval1 = 10; // 每10秒進行一次
     let bufferCounter1 = 0;
     let newdata1 = [];
-
+    let imgElement = document.getElementById("myImage");
+    imgElement.src = "https://i.imgur.com/7MZUeKs.png";
     
     
 
@@ -426,12 +430,12 @@
 
         // 設置彈出視窗中的內容，例如：壓力過低的提示信息
         dialog.innerHTML = "<p>溫度過高！</p>";
-
         // 顯示彈出視窗
         dialog.style.display = "block";
 
         // 設置關閉按鈕的點擊事件處理函式
         var closeBtn = document.createElement("button");
+        var dialog = document.getElementById("customDialog");
         closeBtn.innerText = "關閉";
         closeBtn.onclick = function () {
             dialog.style.display = "none";
@@ -442,10 +446,17 @@
     function showCustomDialog_2() {
         // 獲取自定義的彈出視窗元素
         var dialog = document.getElementById("customDialog");
+        var imgElement = document.getElementById("myImage");
+        imgElement.src = "https://i.imgur.com/7MZUeKs.png";
 
-        // 設置彈出視窗中的內容，例如：壓力過低的提示信息
+         // 設定圖片的尺寸
+        imgElement.style.width = "50px";
+        imgElement.style.height = "50px";
+
+        // 設置彈出視窗中的內容
         dialog.innerHTML = "<p>病患躁動!病患躁動!病患躁動!</p>";
-
+         // 將圖片元素添加到對話框
+        dialog.appendChild(imgElement);
         // 顯示彈出視窗
         dialog.style.display = "block";
 
@@ -465,9 +476,16 @@
     function showCustomDialog_3() {
         // 獲取自定義的彈出視窗元素
         var dialog = document.getElementById("customDialog");
+        var imgElement = document.getElementById("myImage");
+        imgElement.src = "https://i.imgur.com/7MZUeKs.png";
+         // 設定圖片的尺寸
+        imgElement.style.width = "50px";
+        imgElement.style.height = "50px";
 
-        // 設置彈出視窗中的內容，例如：壓力過低的提示信息
-        dialog.innerHTML = "<p>病患躁動!病患躁動!</p>";
+        // 設置彈出視窗中的內容
+        dialog.innerHTML = "<p>病患躁動!病患躁動!病患躁動!</p>";
+        // 將圖片元素添加到對話框
+        dialog.appendChild(imgElement);
 
         // 顯示彈出視窗
         dialog.style.display = "block";
@@ -482,6 +500,8 @@
     }
 
     window.onload = function() {
+        showCustomDialog_2();
+        showCustomDialog_3();
         checkTemperature();
     };
 
@@ -560,6 +580,8 @@
         <br>
         <button id='adc' type="button" class="btn btn-lg btn-block">體溫</button>
         <br>
+        <img id="myImage" />
+        <br>
         <!--
         <button id='adc' type="button" class="btn btn-lg btn-block">躁動度</button>
         <br>-->
@@ -602,7 +624,9 @@
 <body>
     <!-- 在這裡放置HTML內容 -->
     <div id="customDialog" title="基本的對話框">
-        <p>這是一個默認的對話框，用於顯示信息。 對話框窗口可以移動，調整尺寸，默認可通過'x' 圖標關閉。 </p>
+        <p>
+
+        </p>
     </div>
     <div class="row">
         <!-- 其他HTML元素... -->
