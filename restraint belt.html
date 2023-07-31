@@ -256,22 +256,23 @@
     }
     // RING buffer
     let vo1 = 0; // blue
-    let a1 = 100000; 
+    let a1 = 110000; 
     let ringBuffer = [];
     let bufferSize = 10;
     let bufferInterval = 10; // 每10秒進行一次
     let bufferCounter = 0;
     let newdata = [];
-    let lastExceeded = false;
 
     let vo2 = 0; //green
-    let a2 = 100000; 
+    let a2 = 110000; 
     let ringBuffer1 = [];
     let bufferSize1 = 10;
     let bufferInterval1 = 10; // 每10秒進行一次
     let bufferCounter1 = 0;
     let newdata1 = [];
-    let lastExceeded1 = false;
+
+    
+    
 
     function handleNotifications(event) {
         if (!connected )
@@ -286,6 +287,7 @@
           let va=v1+v2*0x100;
           Char1_data[1]=va;
           let temp = -0.8504*va +539.5889
+          temp = temp+5
           //let temp = va
           document.querySelector('#adc').innerText = temp.toFixed(1) + "度";
 
@@ -328,16 +330,9 @@
             ringBuffer1.push(realvalue3);  // 以 realvalue3 更新資料結構
 
             if (realvalue3 > vh || realvalue3 < vl) {
-
-                if (lastExceeded) {
                 showCustomDialog_2();
-                }
-                // 更新
-                lastExceeded = true;
-            } else {
-                // 如果這次沒有超過範圍，則更新 lastExceeded 為 false
-                lastExceeded = false;
             }
+
             if (ringBuffer1.length > bufferSize1) {
                 ringBuffer1.shift();
             }
@@ -352,15 +347,7 @@
             ringBuffer.push(realvalue4);  // 以 realvalue4 更新ring
 
             if (realvalue4 > vh1 || realvalue4 < v2) {
-
-                if (lastExceeded1) {
                 showCustomDialog_3();
-                }
-                // 更新
-                lastExceeded1 = true;
-            } else {
-                // 如果這次沒有超過範圍，lastExceeded1 為 false
-                lastExceeded1 = false;
             }
 
             if (ringBuffer.length > bufferSize) {
@@ -369,7 +356,6 @@
 
             bufferCounter = 0;  
         }
-
 
 
         const adcButton = document.getElementById('adc');
@@ -557,7 +543,7 @@
                         },
                         y: {
                             //beginAtZero: true,
-                            suggestedMin: 4000000, // 设置Y轴的最小值
+                            suggestedMin: 6000000, // 设置Y轴的最小值
                             suggestedMax: 7000000 // 设置Y轴的最大值*/
                         }
                     
@@ -625,4 +611,9 @@
 
 
 </html>
+
+
+
+
+
 
