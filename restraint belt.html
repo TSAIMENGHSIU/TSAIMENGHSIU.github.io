@@ -295,8 +295,20 @@
           let v2=value.getUint8(1);
           let va=v1+v2*0x100;
           Char1_data[1]=va;
-          let temp = -0.8504*va +539.5889
-          temp = temp+3
+
+          let Rt = 0;
+          let Rp = 10000;
+          let T2 = 273.15 + 25;
+          let Bx = 3950;
+          let Ka = 273.15;
+          let vol = 0;
+
+          vol = (va) * (3.3 / 4096); 
+          Rt = (3.3 - vol) * 10000 / vol;
+          temp = 1 / (1 / T2 + Math.log(Rt / Rp) / Bx) - Ka + 0.5;
+
+          //let temp = -0.8504*va +539.5889
+          //temp = temp+3
           //let temp = va
           document.querySelector('#adc').innerText = temp.toFixed(1) + "度";
 
@@ -524,10 +536,6 @@
         dialog.appendChild(closeBtn);
     }
 
-    window.onload = function() {
-        checkTemperature();
-    };
-
     function showCustomDialog_3() {
         // 獲取自定義的彈出視窗元素
         var dialog = document.getElementById("customDialog");
@@ -541,7 +549,6 @@
         dialog.innerHTML = "<p>病患躁動!病患躁動!病患躁動!</p>";
         // 將圖片元素添加到對話框
         dialog.appendChild(imgElement);
-
         // 顯示彈出視窗
         dialog.style.display = "block";
 
@@ -554,12 +561,13 @@
         dialog.appendChild(closeBtn);
     }
 
-    window.onload = function() {
+    /*window.onload = function() {
+        checkTemperature();
         showCustomDialog_2();
         showCustomDialog_3();
         checkTemperature();
     };
-
+*/
     function playSound() {
         // 新的Audio对象
         var audio = new Audio("https://raw.githubusercontent.com/TSAIMENGHSIU/music/main/123.mp3");
@@ -571,7 +579,7 @@
         setTimeout(function() {
             audio.pause();
             audio.currentTime = 0;
-        }, 1500);
+        }, 3000);
     }
 
     function vibrateDevice() {
