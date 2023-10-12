@@ -35,8 +35,9 @@
     const X = new Uint16Array(2);
     var change_flag=0;
     var maxLength = 150;
-    let realvalue3
-    let realvalue4
+    var realvalue3
+    var realvalue4
+    let temp; // 初始化 temp
 
 
     function log(v) {
@@ -278,7 +279,7 @@
     let threadhold1 = 0;
     let RingCounter1=0;
 
-    let temp; // 初始化 temp
+   
 
     let imgElement = document.getElementById("myImage");
     imgElement.src = "https://i.imgur.com/7MZUeKs.png";
