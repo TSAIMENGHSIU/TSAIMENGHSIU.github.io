@@ -37,7 +37,7 @@
     var maxLength = 150;
     var realvalue3
     var realvalue4
-    let temp; // 初始化 temp
+    //let temp; // 初始化 temp
 
 
     function log(v) {
@@ -317,7 +317,7 @@
           let vol = 0;
 
           vol = (va) * (1.25 / 4096); 
-          Rt = (3.3 - vol) * 10000 / vol;
+          Rt = (1.25 - vol) * 10000 / vol;
           temp =1 / (1 / T2 + Math.log(Rt / Rp) / Bx) - Ka + 0.5;
 
           //let temp = -0.8504*va +539.5889
@@ -336,7 +336,7 @@
           realvalue3 = value.getUint16(4) + value.getUint8(10)*65536;
           realvalue4 = value.getUint8(12) + value.getUint8(13)*256 + value.getUint8(14)*65536;
           //gattOperationInProgress = false; // 标记 GATT 操作已完成
-        });
+        })
        // .catch(error => {
         //  console.error("GATT操作出错：" + error);
           //gattOperationInProgress = false; // 标记 GATT 操作已完成
