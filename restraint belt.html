@@ -35,8 +35,8 @@
     const X = new Uint16Array(2);
     var change_flag=0;
     var maxLength = 150;
-
-    
+    let realvalue3
+    let realvalue4
 
 
     function log(v) {
@@ -278,16 +278,28 @@
     let threadhold1 = 0;
     let RingCounter1=0;
 
+    let temp; // 初始化 temp
+
     let imgElement = document.getElementById("myImage");
     imgElement.src = "https://i.imgur.com/7MZUeKs.png";
     
-    
-
+    //let gattOperationInProgress = false; // 用于跟踪是否有 GATT 操作正在进行
+  
     function handleNotifications(event) {
         if (!connected )
         return;
+
+
+        //if (gattOperationInProgress) {
+          // 如果已经有 GATT 操作在进行，等待一段时间后再尝试
+        //  setTimeout(handleNotifications, 1000); // 1秒后再次尝试
+        //  return;
+        //}
+
+        //gattOperationInProgress = true; // 标记 GATT 操作已开始
+
         myCharacteristic .readValue()
-        .then(value => {
+          .then(value => {
           value = value.buffer ? value : new DataView(value); //value 
           //realvalue=value.getUint16(0)
           //realvalue2=value.getUint8(4)+value.getUint8(5)*256 +value.getUint8(6)*65536;
@@ -305,25 +317,30 @@
 
           vol = (va) * (1.25 / 4096); 
           Rt = (3.3 - vol) * 10000 / vol;
-          temp = 1 / (1 / T2 + Math.log(Rt / Rp) / Bx) - Ka + 0.5;
+          temp =1 / (1 / T2 + Math.log(Rt / Rp) / Bx) - Ka + 0.5;
 
           //let temp = -0.8504*va +539.5889
           //temp = temp+3
           //let temp = va
           document.querySelector('#adc').innerText = temp.toFixed(1) + "度";
 
-        if (temp < 35) {
-            // 溫度低於25度時，彈出小視窗
-            //showCustomDialog();
-        }
-        if (temp > 37.5) {
-            // 溫度高於37.5度時，彈出小視窗
-            //showCustomDialog_1();
-        }
-        realvalue3 = value.getUint16(4) + value.getUint8(10)*65536;
-        realvalue4 = value.getUint8(12) + value.getUint8(13)*256 + value.getUint8(14)*65536;
-        })
-        
+          if (temp < 35) {
+              // 溫度低於25度時，彈出小視窗
+              //showCustomDialog();
+          }
+          if (temp > 37.5) {
+              // 溫度高於37.5度時，彈出小視窗
+              //showCustomDialog_1();
+          }
+          realvalue3 = value.getUint16(4) + value.getUint8(10)*65536;
+          realvalue4 = value.getUint8(12) + value.getUint8(13)*256 + value.getUint8(14)*65536;
+          //gattOperationInProgress = false; // 标记 GATT 操作已完成
+        });
+       // .catch(error => {
+        //  console.error("GATT操作出错：" + error);
+          //gattOperationInProgress = false; // 标记 GATT 操作已完成
+        //});
+            
         
         // 計算realvalue3前5個值的平均當作初始值
         if (newdata.length < 5) {
@@ -466,6 +483,7 @@
                 chart2.data.datasets[i].data.shift();
             }
         }
+      
 
     }
      
