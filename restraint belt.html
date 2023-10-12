@@ -448,7 +448,7 @@
 
 
         const adcButton = document.getElementById('adc');
-        const temp = parseFloat(document.getElementById('adc').innerText);
+        let temp = parseFloat(document.getElementById('adc').innerText);
 
         //if(temp>=36 & temp<37.2) // 人類的平均體溫為36.5℃~37.2℃(腋下體溫)
         if(temp>=36 && temp<=37.2)
