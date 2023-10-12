@@ -303,7 +303,7 @@
           let Ka = 273.15;
           let vol = 0;
 
-          vol = (va) * (3.3 / 4096); 
+          vol = (va) * (1.25 / 4096); 
           Rt = (3.3 - vol) * 10000 / vol;
           temp = 1 / (1 / T2 + Math.log(Rt / Rp) / Bx) - Ka + 0.5;
 
